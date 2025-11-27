@@ -28,6 +28,8 @@ echo ${CLOUD_PROVIDER}
 
 echo "starting dnf install of yq"
 
+dnf upgrade -y librepo
+
 dnf install git -y
 
 echo "Dnf install done"
