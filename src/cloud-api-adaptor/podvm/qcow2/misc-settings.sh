@@ -20,6 +20,18 @@ if [[ -n "${ACTIVATION_KEY}" && -n "${ORG_ID}" ]]; then \
     subscription-manager register --org="${ORG_ID}" --activationkey="${ACTIVATION_KEY}"
 fi
 
+echo ${ACTIVATION_KEY}
+
+echo ${ORG_ID}
+
+echo ${CLOUD_PROVIDER}
+
+echo "starting dnf install of yq"
+
+dnf -q install yq -y
+
+echo "Dnf install done"
+
 # install required packages
 if [ "$CLOUD_PROVIDER" == "vsphere" ]
 then
