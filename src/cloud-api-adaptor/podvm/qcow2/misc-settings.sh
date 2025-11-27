@@ -28,7 +28,7 @@ echo ${CLOUD_PROVIDER}
 
 echo "starting dnf install of yq"
 
-dnf -q install yq -y
+dnf install git -y
 
 echo "Dnf install done"
 
