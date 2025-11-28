@@ -20,6 +20,9 @@ if [[ -n "${ACTIVATION_KEY}" && -n "${ORG_ID}" ]]; then \
     subscription-manager register --org="${ORG_ID}" --activationkey="${ACTIVATION_KEY}"
 fi
 
+subscription-manager status
+subscription-manager repos --list-enabled
+
 echo ${ACTIVATION_KEY}
 
 echo ${ORG_ID}
