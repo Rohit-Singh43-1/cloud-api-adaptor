@@ -54,8 +54,7 @@ then
     if [ ! -x "$(command -v iptables)" ]; then
         case $PODVM_DISTRO in
         rhel)
-            dnf -q install iptables-nft -y
-	    dnf install -y kernel-modules kernel-modules-extra
+            dnf -q install iptables-nft -y && dnf install -y kernel-modules kernel-modules-extra
             ;;
         ubuntu)
             apt-get -qq update && apt-get -qq install iptables -y
