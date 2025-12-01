@@ -20,7 +20,7 @@ if [[ -n "${ACTIVATION_KEY}" && -n "${ORG_ID}" ]]; then \
     subscription-manager register --org="${ORG_ID}" --activationkey="${ACTIVATION_KEY}"
 fi
 
-dnf upgrade -y librepo
+dnf install -y librepo
 echo "Trying installing git"
 
 # install required packages
