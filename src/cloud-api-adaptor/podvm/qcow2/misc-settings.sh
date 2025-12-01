@@ -23,8 +23,6 @@ fi
 dnf upgrade -y librepo
 echo "Trying installing git"
 
-dnf install -y git
-
 # install required packages
 if [ "$CLOUD_PROVIDER" == "vsphere" ]
 then
