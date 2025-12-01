@@ -13,15 +13,12 @@
 # dhcp IP is assigned to the VM
 echo -n | sudo tee /etc/machine-id
 #Lock password for the ssh user (peerpod) to disallow logins
-#sudo passwd -l peerpod
+sudo passwd -l peerpod
 
 # Subscribe RHEL incase of ACTIVATION_KEY & ORG_ID provided.
 if [[ -n "${ACTIVATION_KEY}" && -n "${ORG_ID}" ]]; then \
     subscription-manager register --org="${ORG_ID}" --activationkey="${ACTIVATION_KEY}"
 fi
-
-dnf install -y librepo
-echo "Trying installing git"
 
 # install required packages
 if [ "$CLOUD_PROVIDER" == "vsphere" ]
@@ -55,7 +52,7 @@ then
     if [ ! -x "$(command -v iptables)" ]; then
         case $PODVM_DISTRO in
         rhel)
-	    echo "Install iptables for RHel"
+	    dnf install -y librepo
             dnf -q install iptables-nft -y && dnf install -y kernel-modules kernel-modules-extra
             ;;
         ubuntu)
