@@ -54,6 +54,8 @@ then
         rhel)
 	    dnf install -y librepo
             dnf -q install iptables-nft -y && dnf install -y kernel-modules kernel-modules-extra
+	    dnf install -y python3-dnf-plugins-core
+	    dnf versionlock add kernel*
             ;;
         ubuntu)
             apt-get -qq update && apt-get -qq install iptables -y
