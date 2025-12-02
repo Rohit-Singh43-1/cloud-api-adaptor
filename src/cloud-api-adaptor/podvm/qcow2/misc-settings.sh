@@ -52,7 +52,7 @@ then
     if [ ! -x "$(command -v iptables)" ]; then
         case $PODVM_DISTRO in
         rhel)
-	    dnf install -y librepo
+	    dnf install -y librepo --nogpgcheck
             dnf -q install iptables-nft -y && dnf install -y kernel-modules kernel-modules-extra
 	    echo "install plugin"
 	    dnf install -y 'dnf-command(versionlock)'
