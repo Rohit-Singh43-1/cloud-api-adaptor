@@ -52,13 +52,14 @@ then
     if [ ! -x "$(command -v iptables)" ]; then
         case $PODVM_DISTRO in
         rhel)
+	     dnf -q install iptables -y
 	    #dnf install -y librepo
-            dnf -q install iptables-nft -y && dnf install -y kernel-modules-$(uname -r) kernel-modules-extra-$(uname -r) 
-	    echo "install plugin"
-	    dnf install -y 'dnf-command(versionlock)'
-	    dnf versionlock add kernel-$(uname -r)
-	    dnf versionlock add kernel-modules-$(uname -r)
-            dnf versionlock add kernel-modules-extra-$(uname -r)
+            #dnf -q install iptables-nft -y && dnf install -y kernel-modules-$(uname -r) kernel-modules-extra-$(uname -r) 
+	    #echo "install plugin"
+	    #dnf install -y 'dnf-command(versionlock)'
+	    #dnf versionlock add kernel-$(uname -r)
+	    #dnf versionlock add kernel-modules-$(uname -r)
+            #dnf versionlock add kernel-modules-extra-$(uname -r)
             ;;
         ubuntu)
             apt-get -qq update && apt-get -qq install iptables -y
