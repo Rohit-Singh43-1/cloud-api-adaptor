@@ -13,7 +13,7 @@
 # dhcp IP is assigned to the VM
 echo -n | sudo tee /etc/machine-id
 #Lock password for the ssh user (peerpod) to disallow logins
-#sudo passwd -l peerpod
+sudo passwd -l peerpod
 
 # Subscribe RHEL incase of ACTIVATION_KEY & ORG_ID provided.
 if [[ -n "${ACTIVATION_KEY}" && -n "${ORG_ID}" ]]; then \
@@ -32,12 +32,14 @@ if [[ "$CLOUD_PROVIDER" != "docker" ]]; then
     if [ ! -x "$(command -v iptables)" ]; then
         case $PODVM_DISTRO in
         rhel)
-            # dnf -q install iptables -y
-	    dnf -q install iptables-nft -y && dnf install -y kernel-modules-$(uname -r) kernel-modules-extra-$(uname -r)
-	    echo "install plugin"
-            dnf install -y 'dnf-command(versionlock)'
-            dnf versionlock add kernel-$(uname -r)
-            dnf versionlock add kernel-modules-$(uname -r)
+            if [[ "$ARCH" == "s390x" ]]; then
+	    	dnf -q install iptables-nft -y && dnf install -y kernel-modules-$(uname -r) kernel-modules-extra-$(uname -r)
+            	dnf install -y 'dnf-command(versionlock)'
+            	dnf versionlock add kernel-$(uname -r)
+            	dnf versionlock add kernel-modules-$(uname -r)
+            else 
+             	dnf -q install iptables -y
+            fi
             ;;
         ubuntu)
             apt-get -qq update && apt-get -qq install iptables -y
