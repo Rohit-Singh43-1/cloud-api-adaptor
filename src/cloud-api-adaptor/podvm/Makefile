@@ -95,7 +95,11 @@ insecure-builder:
 		--buildkitd-flags '--allow-insecure-entitlement security.insecure'
 
 PHONY: image
+ifeq ($(ARCH),s390x)
+image:
+else
 image: insecure-builder
+endif
 	rm -rf ./build
 	@echo "Building image..."
 ifeq ($(SE_BOOT),true)
@@ -121,7 +125,11 @@ else
 endif
 
 PHONY: image-debug
+ifeq ($(ARCH),s390x)
+image-debug:
+else
 image-debug: insecure-builder
+endif
 	rm -rf ./build
 	@echo "Building debug image..."
 ifeq ($(SE_BOOT),true)
@@ -148,7 +156,11 @@ else
 endif
 
 PHONY: image-sftp
+ifeq ($(ARCH),s390x)
+image-sftp:
+else
 image-sftp: insecure-builder
+endif
 	rm -rf ./build
 	@echo "Building sftp image..."
 ifeq ($(SE_BOOT),true)
